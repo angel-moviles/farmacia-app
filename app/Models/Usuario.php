@@ -53,11 +53,14 @@ class Usuario extends Authenticatable
      * Requiere haber ejecutado: php artisan storage:link
      */
     public function getFotoUrlAttribute()
-    {
-        if ($this->foto) {
-            return asset('storage/usuarios/' . $this->foto);
+        {
+            if ($this->foto) {
+                // Verificar si el archivo existe
+                $storagePath = storage_path('app/public/usuarios/' . $this->foto);
+                if (file_exists($storagePath)) {
+                    return url('/api/images/usuarios/' . $this->foto);
+                }
+            }
+            return null;
         }
-        // Puedes poner una URL de imagen por defecto aquí si prefieres
-        return null; 
-    }
 }

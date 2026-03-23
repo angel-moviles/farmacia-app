@@ -48,8 +48,9 @@ Route::apiResource('venta_detalles', VentaDetalleController::class);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 // --- IMÁGENES ---
-Route::get('/images/usuarios/{filename}', [ImageController::class, 'getUsuarioImage']);
-
+// Al final del archivo, antes de las rutas de recursos
+Route::get('/images/usuarios/{filename}', [App\Http\Controllers\ImageController::class, 'getUsuarioImage']);
+Route::get('/images/productos/{filename}', [App\Http\Controllers\ImageController::class, 'getProductoImage']); 
 // --- REPORTES ---
 Route::prefix('reportes')->group(function () {
     Route::get('/ventas', [ReporteController::class, 'ventasPorPeriodo']);

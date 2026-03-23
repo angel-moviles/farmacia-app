@@ -6,7 +6,13 @@ return [
     'allowed_origins' => [
         'http://localhost:3000',
         'http://localhost:3001',
-        'http://localhost:5173'
+        'http://localhost:5173',
+        'http://localhost:8082',
+        'http://localhost:19006',
+        'http://localhost:19000',
+        'http://127.0.0.1:8081',
+        'http://127.0.0.1:19006',
+        '*',
     ],
     'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'],
