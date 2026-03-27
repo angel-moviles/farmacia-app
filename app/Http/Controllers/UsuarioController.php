@@ -40,7 +40,7 @@ class UsuarioController extends Controller
             if ($request->hasFile('foto')) {
                 $file = $request->file('foto');
                 $nombreArchivo = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-                $file->storeAs('public/usuarios', $nombreArchivo);
+                $file->storeAs('usuarios', $nombreArchivo, 'pubilc');
                 $data['foto'] = $nombreArchivo;
             }
 
@@ -114,7 +114,7 @@ class UsuarioController extends Controller
                     $filename = time() . '_' . uniqid() . '.' . $extension;
                     
                     // Guardar en la carpeta pública correcta
-                    $file->storeAs('public/usuarios', $filename);
+                    $file->storeAs('usuarios', $filename, 'public');
                     
                     // Eliminar foto anterior
                     if ($usuario->foto) {
@@ -153,7 +153,7 @@ class UsuarioController extends Controller
         try {
             $usuario = Usuario::findOrFail($id);
             if ($usuario->foto) {
-                Storage::delete('public/usuarios/' . $usuario->foto);
+                Storage::disk('public')->delete('usuarios/' . $usuario->foto);
             }
             $usuario->delete();
             return response()->json(["message" => "Usuario eliminado correctamente"]);

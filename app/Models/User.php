@@ -1,49 +1,50 @@
 <?php
 
+
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 use Illuminate\Notifications\Notifiable;
 
+use Laravel\Sanctum\HasApiTokens;
+
+
 class User extends Authenticatable
+
 {
-    /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    use HasApiTokens, Notifiable;
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    protected $table = 'usuarios'; // Tabla de la UTVT
+
+    protected $primaryKey = 'id_usuario';
+
+
+    // Laravel busca 'password', tú usas 'contrasena'
+
+    public function getAuthPassword()
+
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+
+        return $this->contrasena;
+
     }
+
+
+    protected $fillable = [
+
+        'clave_usuario', 'nombre', 'a_paterno', 'a_materno', 
+
+        'fecha_nacimiento', 'sexo', 'telefono', 'correo', 
+
+        'contrasena', 'id_rol', 'activo'
+
+    ];
+
+
+    protected $hidden = ['contrasena', 'remember_token'];
+
 }

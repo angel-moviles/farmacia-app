@@ -51,7 +51,7 @@ class ProductoController extends Controller
                 $file = $request->file('foto');
                 $extension = $file->getClientOriginalExtension();
                 $filename = time() . '_' . uniqid() . '.' . $extension;
-                $file->storeAs('public/productos', $filename);
+                $file->storeAs('productos', $filename, 'public');
                 $data['foto'] = $filename;
                 Log::info('Foto guardada: ' . $filename);
             }
@@ -103,13 +103,13 @@ class ProductoController extends Controller
             if ($request->hasFile('foto')) {
                 // Eliminar foto anterior si existe
                 if ($producto->foto) {
-                    Storage::delete('public/productos/' . $producto->foto);
+                    Storage::disk('public')->delete('productos/' . $producto->foto);
                 }
                 
                 $file = $request->file('foto');
                 $extension = $file->getClientOriginalExtension();
                 $filename = time() . '_' . uniqid() . '.' . $extension;
-                $file->storeAs('public/productos', $filename);
+                $file->storeAs('productos', $filename, 'public');
                 $data['foto'] = $filename;
                 Log::info('Foto actualizada: ' . $filename);
             }

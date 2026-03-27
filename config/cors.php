@@ -1,22 +1,23 @@
 <?php
 
+
 return [
+
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
+
     'allowed_methods' => ['*'],
-    'allowed_origins' => [
-        'http://localhost:3000',
-        'http://localhost:3001',
-        'http://localhost:5173',
-        'http://localhost:8082',
-        'http://localhost:19006',
-        'http://localhost:19000',
-        'http://127.0.0.1:8081',
-        'http://127.0.0.1:19006',
-        '*',
-    ],
+
+    'allowed_origins' => [], // Déjalo vacío, el servidor de la UTVT ya pone el '*'
+
     'allowed_origins_patterns' => [],
+
     'allowed_headers' => ['*'],
-    'exposed_headers' => ['*'],
+
+    'exposed_headers' => [],
+
     'max_age' => 0,
+
     'supports_credentials' => false,
+
 ];
+
